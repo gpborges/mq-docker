@@ -25,9 +25,6 @@ ARG MQ_URL=http://public.dhe.ibm.com/ibmdl/export/pub/software/websphere/messagi
 # The MQ packages to install
 ARG MQ_PACKAGES="MQSeriesRuntime-*.rpm MQSeriesServer-*.rpm MQSeriesMsg*.rpm MQSeriesJava*.rpm MQSeriesJRE*.rpm MQSeriesGSKit*.rpm MQSeriesWeb*.rpm"
 
-# Flag to indicate if we should install a fixpack from /fixpack directory or not.
-ARG INSTALL_FIXPACK=false
-
 RUN export DEBIAN_FRONTEND=noninteractive \
   && ln -s /lib64 /usr/ \
   # The MQ packages to install
@@ -101,9 +98,6 @@ COPY admin.json /etc/mqm/
 COPY mq-dev-config /etc/mqm/mq-dev-config
 
 RUN chmod +x /usr/local/bin/*.sh
-
-#Copy fixpack from /fixpack directory
-COPY fixpack/* /tmp
 
 # Support the latest functional cmdlevel by default
 ENV MQ_QMGR_CMDLEVEL=802
